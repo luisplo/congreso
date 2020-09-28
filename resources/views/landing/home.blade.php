@@ -8,19 +8,19 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam gravida nibh et rutrum fringilla. Donec vitae efficitur urna. Cras risus metus, interdum quis pharetra eu, gravida ac dui.</p>
         </header>
         <div class="row  d-flex justify-content-center">
-            @for ($i = 0; $i < 10; $i++) 
+            @foreach($speakerImg as $key => $value)
             <div class="col-lg-3 col-md-6">
                 <div class="member" data-aos="fade-up">
-                    <img src="{{ url('storage/landing/speaker/img1.jpg') }}" class="img-fluid" alt="">
+                    <img src="{{ url('storage/'.$value->url) }}" class="img-fluid" alt="">
                     <div class="member-info">
                         <div class="member-info-content">
-                            <h4>Prueba </h4>
-                            <span>Hola mundo</span>
+                            <h4>{{$value->name}}</h4>
+                            <span>{{$value->name_detail}}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            @endfor
+            @endforeach
         </div>
     </div>
 </section>
@@ -33,17 +33,17 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam gravida nibh et rutrum fringilla. Donec vitae efficitur urna. Cras risus metus, interdum quis pharetra eu, gravida ac dui.</p>
         </header>
         <div class="row portfolio-container  d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
-            @for ($i = 0; $i < 10; $i++) 
+            @foreach ($calendarImg as $key => $value)
             <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                 <div class="portfolio-wrap">
                     <figure>
-                        <img src="{{ url('storage/landing/speaker/img1.jpg') }}" class="img-fluid" alt="">
-                        <a href="{{ url('storage/landing/speaker/img1.jpg') }}" data-lightbox="portfolio" data-title="App 1" class="link-preview venobox"><i class="far fa-eye"></i></a>
-                        <a href="portfolio-details.html" class="link-details" title="More Details"><i class="fas fa-cloud-download-alt"></i></a>
+                        <img src="{{ url('storage/'.$value->url) }}" class="img-fluid" alt="">
+                        <a href="{{ url('storage/'.$value->url) }}" data-lightbox="portfolio" data-title="App 1" class="link-preview venobox"><i class="far fa-eye"></i></a>
+                        <a href="{{ route('calendar.download',$value->id) }}" class="link-details" title="More Details"><i class="fas fa-cloud-download-alt"></i></a>
                     </figure>
                 </div>
             </div>
-            @endfor
+            @endforeach
         </div>
     </div>
 </section>

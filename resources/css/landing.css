@@ -125,7 +125,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header.header-transparent {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 #header.header-scrolled {
@@ -414,7 +414,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #intro .carousel-item::before {
   content: '';
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 #intro .carousel-container {
@@ -1297,4 +1297,3 @@ section {
   font-size: 13px;
   color: #ddd;
 }
-

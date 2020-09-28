@@ -32,7 +32,7 @@
                             <li><a href="#team">Conferencistas</a></li>
                             <li><a href="#portfolio">Cronograma</a></li>
                             <li><a href="#contact">Contacto</a></li>
-                            <li><a href="/">Registro</a></li>
+                            <li><a href="{{ url('/register') }}">Registro</a></li>
                             @auth
                             <li><a href="{{ url('/home') }}">Login</a></li>
                             @else
@@ -50,36 +50,23 @@
             <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
                 <ol class="carousel-indicators"></ol>
                 <div class="carousel-inner" role="listbox">
-
-                    @for ($i = 0; $i < 10; $i++) <div class="carousel-item {{$i == 0 ? 'active' : '' }}" style="background-image: url(storage/landing/speaker/img1.jpg)">
-                        <div class="carousel-container">
-                            <div class="container">
-                                <h2 class="animate__animated animate__fadeInDown">We are professional</h2>
-                                <p class="animate__animated animate__fadeInUp">pp</p>
-                                <a href="#featured-services" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
-                            </div>
-                        </div>
+                    @foreach($carouselImg as $key => $value)
+                    <div class="carousel-item {{$key == 0 ? 'active' : '' }}" style="background-image: url(storage/{{$value->url}})">
+                    </div>
+                    @endforeach
                 </div>
-                @endfor
-
-
-
-
-
+                <a class="carousel-control-prev" href="#introCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#introCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <a class="carousel-control-prev" href="#introCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#introCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
         </div>
     </section><!-- End Intro Section -->
     <main id="main">
-
         <!-- Begin Page Content -->
         <div class=" py-4">
             <div class="container-fluid">

@@ -11,15 +11,26 @@
 |
 */
 
-Route::get('/', 'LandingController@index');
-
 Auth::routes();
 
+// ADMIN
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', 'HomeController@logout')->name('logout');
+
+//LANDING PAGE
+Route::get('/', 'LandingController@index')->name('landing.home');
 Route::get('/carousel/create', 'HomeController@carouselCreate');
-Route::get('/table', 'HomeController@table')->name('tables');
 Route::post('/carousel/store', 'HomeController@carouselStore')->name('carousel.store');
+Route::get('/calendar/create', 'HomeController@calendarCreate');
+Route::post('/calendar/store', 'HomeController@calendarStore')->name('calendar.store');
+Route::get('/calendar/download/{id}', 'HomeController@calendarDownload')->name('calendar.download');
+Route::get('/speaker/create', 'HomeController@speakerCreate');
+Route::post('/speaker/store', 'HomeController@speakerStore')->name('speaker.store');
 
-Auth::routes();
+//REGISTRO
+Route::get('/city/{id}', 'RegisterController@cityShow');
+Route::get('/register', 'RegisterController@index');
+Route::post('/register/create', 'RegisterController@registerStore')->name('register.store');
 
-Route::get('/home', 'HomeController@index')->name('home');
+//OTROS
+Route::get('/table', 'HomeController@table')->name('tables');

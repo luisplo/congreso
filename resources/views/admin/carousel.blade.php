@@ -21,20 +21,21 @@
         <section id="portfolio" class="section-bg">
             <div class="container" data-aos="fade-up">
                 <div class="row portfolio-container  d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
-                    @for ($i = 0; $i < 10; $i++) <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    @foreach ($imgCarousel as $img)
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                         <div class="portfolio-wrap">
                             <figure>
-                                <img src="{{ url('storage/landing/speaker/img1.jpg') }}" class="img-fluid" alt="">
-                                <a href="{{ url('storage/landing/speaker/img1.jpg') }}" data-lightbox="portfolio" data-title="App 1" class="link-preview venobox"><i class="far fa-eye"></i></a>
-                                <a href="portfolio-details.html" class="link-details" title="More Details"><i class="fas fa-cloud-download-alt"></i></a>
+                                <img src="{{ url('storage/'.$img->url) }}" class="img-fluid" alt="">
+                                <a href="{{ url('storage/'.$img->url) }}" data-lightbox="portfolio" data-title="App 1" class="link-preview venobox"><i class="far fa-eye"></i></a>
+                                <a href="portfolio-details.html" class="link-details" title="More Details"><i class="far fa-trash-alt"></i></a>
                             </figure>
                         </div>
+                    </div>
+                    @endforeach
                 </div>
-                @endfor
             </div>
+        </section>
+        <!-- End Portfolio Section -->
     </div>
-    </section>
-    <!-- End Portfolio Section -->
-</div>
 </div>
 @endsection
