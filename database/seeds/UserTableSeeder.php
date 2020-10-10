@@ -3,6 +3,7 @@
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class UserTableSeeder extends Seeder
 {
@@ -13,22 +14,24 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $data =  [
-            [
-                'name'  => 'Admin',
-                'email'     => 'chavarrocutiva2001@hotmail.com',
-                'password'  => bcrypt('admin123'),
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        $role = Role::create(['name' => 'admin']);
+        $role = Role::create(['name' => 'evaluator']);
 
-            ],
-            [
-                'name'  => 'Admin',
-                'email'     => 'luisreyes.apolo@gmail.com',
-                'password'  => bcrypt('admin123'),
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        $user = User::create([
+            'name' => 'Admin',
+            'email' => 'chavarrocutiva2001@hotmail.com',
+            'password' => bcrypt('admin123')
+        ]);
+        // Asignación del rol
+        $user->assignRole('admin');
 
-            ]
-        ];
-        User::insert($data);
+        $user = User::create([
+            'name' => 'Admin',
+            'email' => 'luisreyes.apolo@gmail.com',
+            'password' => bcrypt('admin123')
+        ]);
+        // Asignación del rol
+        $user->assignRole('admin');
+
     }
 }

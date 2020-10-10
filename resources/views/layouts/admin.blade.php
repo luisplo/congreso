@@ -15,12 +15,19 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
 </head>
 
 <body id="page-top">
+    <style>
+    .img-respon{
+        object-fit: cover;
+        object-position: center;
+        max-width: 100%;
+        height: 350px;
+    }
+</style>
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -29,7 +36,6 @@
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
                 <div class="sidebar-brand-icon">
                     <img src="{{url('storage/logo/sena.svg')}}" width="40px" height="40px">
-
                 </div>
                 <div class="sidebar-brand-text mx-3">SENA<sup>2020</sup></div>
             </a>
@@ -38,20 +44,19 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="/home">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+            @if(@Auth::user()->hasRole('evaluator'))
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Inicio</span>
+                </a>
             </li>
-
-            <!-- Divider -->
             <hr class="sidebar-divider">
+            @endif
 
-            <!-- Heading -->
-            <!-- <div class="sidebar-heading">
-                Configurac&oacute;n
-            </div> -->
 
+            @if(@Auth::user()->hasRole('admin'))
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -63,12 +68,30 @@
                         <a class="collapse-item" href="/carousel/create">Carrusel</a>
                         <a class="collapse-item" href="/speaker/create">Conferencista</a>
                         <a class="collapse-item" href="/calendar/create">Cronograma</a>
+                        <a class="collapse-item" href="/ally/create">Aliados</a>
                     </div>
                 </div>
             </li>
+             <li class="nav-item">
+                <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Reportes</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="assistan">Asistentes</a>
+                        <a class="collapse-item" href="institution">Sede</a>
+                        <a class="collapse-item" href="dependence">Dependencia</a>
+                        <a class="collapse-item" href="provider">Proveedor</a>
+                    </div>
+                </div>
+            </li>
+            <hr class="sidebar-divider d-none d-md-block">
+            @endif
 
             <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -92,13 +115,13 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name}}</span>
-                            <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                            <img class="img-profile rounded-circle" src="{{ url('/storage/logo/no-avatar.png') }}">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
+                                Cerrar Sesi&oacute;n
                             </a>
                         </div>
                     </li>
@@ -138,27 +161,8 @@
     @endslot
 
     @endcomponent
-    <script>
-        Dropzone.options.imageUpload = {
-            maxFilesize: 10,
-            acceptedFiles: ".jpeg,.jpg,.png",
-            addRemoveLinks: false,
-            timeout: 5000,
-            uploadMultiple:false,
-            success: function(file, response) {
-                if (file.status == 'success') {
-                    alert('Guardado exitosamente');
-                } else {
-                    console.error(file.status);
-                }
-            },
-            error: function(file, response) {
-                console.error(file.status);
-                return false;
-            }
 
-        };
-    </script>
+    @yield('scripts')
 </body>
 
 </html>

@@ -46,9 +46,9 @@
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                         <div class="portfolio-wrap">
                             <figure>
-                                <img src="{{ url('storage/'.$img->url) }}" class="img-fluid" alt="">
+                                <img src="{{ url('storage/'.$img->url) }}" class="img-respon" alt="">
                                 <a href="{{ url('storage/'.$img->url) }}" data-lightbox="portfolio" data-title="App 1" class="link-preview venobox"><i class="far fa-eye"></i></a>
-                                <a href="portfolio-details.html" class="link-details" title="More Details"><i class="far fa-trash-alt"></i></a>
+                                <a href="/speaker/destroy/{{ $img->id }}"  class="link-details" ><i class="far fa-trash-alt"></i></a>
                             </figure>
                         </div>
                     </div>

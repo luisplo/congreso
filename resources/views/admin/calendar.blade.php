@@ -11,12 +11,18 @@
     </div>
     <div class="card-body">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lectus dolor, ultrices a nunc id, hendrerit lobortis ex. Donec iaculis accumsan porttitor. Vivamus metus nulla.</p>
-        <div class="row mb-2 mt-5">
-            <div class="col-md-12">
-                {!! Form::open([ 'route' => [ 'calendar.store' ], 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'image-upload' ]) !!}
-                {!! Form::close() !!}
+
+        <form action="/calendar/store" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <label for="image">Imagen</label>
+                <input id="image" name="image" type="file" class="form-control" placeholder="Developer">
+                @error('image')
+                <small class="form-text text-danger">{{ $message }}</small>
+                @enderror
             </div>
-        </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
         <!-- ======= Portfolio Section ======= -->
         <section id="portfolio" class="section-bg">
             <div class="container" data-aos="fade-up">
@@ -25,9 +31,9 @@
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                         <div class="portfolio-wrap">
                             <figure>
-                                <img src="{{ url('storage/'.$img->url) }}" class="img-fluid" alt="">
+                                <img src="{{ url('storage/'.$img->url) }}" class="img-respon" alt="">
                                 <a href="{{ url('storage/'.$img->url) }}" data-lightbox="portfolio" data-title="App 1" class="link-preview venobox"><i class="far fa-eye"></i></a>
-                                <a href="portfolio-details.html" class="link-details" title="More Details"><i class="far fa-trash-alt"></i></a>
+                            <a href="/calendar/destroy/{{ $img->id }}" class="link-details"><i class="far fa-trash-alt"></i></a>
                             </figure>
                         </div>
                     </div>

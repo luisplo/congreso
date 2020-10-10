@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ally;
 use App\Models\Calendar;
 use App\Models\Carousel;
 use App\Models\Speaker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use DataTables;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
@@ -21,6 +24,21 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
+    public function assistan(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = DB::table('registers')
+                ->join('type_documents', 'registers.type_document', '=', 'type_documents.id')
+                ->join('cities', 'registers.city', '=', 'cities.id')
+                ->join('departaments', 'cities.departament_id', '=', 'departaments.id')
+                ->select('registers.*', 'type_documents.name as type_docu', 'cities.name as cityName', 'departaments.name as departament')
+                ->where('registers.modality','=',2)
+                ->get();
+            return DataTables::of($data)->make(true);
+        }
+        return view('admin.assistan');
+    }
+
     public function logout()
     {
         Auth::logout();
@@ -40,8 +58,11 @@ class HomeController extends Controller
 
     public function carouselStore(Request $request)
     {
+        $request->validate([
+            'image' => 'required|mimes:jpeg,jpg,png',
+        ]);
         $user = Auth::id();
-        $file = $request->file('file');
+        $file = $request->file('image');
         $fileName = $file->getClientOriginalName();
         $path = Storage::disk('public')->put('carousel', $file);
         $save = [
@@ -50,7 +71,14 @@ class HomeController extends Controller
             'user_id' => $user
         ];
         Carousel::create($save);
-        return response()->json();
+        return redirect()->back();
+    }
+
+    public function carouselDestroy($id)
+    {
+        $data = Carousel::findOrFail($id);
+        $data->delete();
+        return redirect()->back();
     }
 
     public function calendarCreate()
@@ -61,8 +89,11 @@ class HomeController extends Controller
 
     public function calendarStore(Request $request)
     {
+        $request->validate([
+            'image' => 'required|mimes:jpeg,jpg,png',
+        ]);
         $user = Auth::id();
-        $file = $request->file('file');
+        $file = $request->file('image');
         $fileName = $file->getClientOriginalName();
         $path = Storage::disk('public')->put('calendar', $file);
         $save = [
@@ -71,13 +102,20 @@ class HomeController extends Controller
             'user_id' => $user
         ];
         Calendar::create($save);
-        return response()->json();
+        return redirect()->back();
+    }
+
+    public function calendarDestroy($id)
+    {
+        $data = Calendar::findOrFail($id);
+        $data->delete();
+        return redirect()->back();
     }
 
     public function CalendarDownload($id)
     {
         $data = Calendar::find($id);
-        return Storage::disk('public')->download($data->url,$data->file_name);
+        return Storage::disk('public')->download($data->url, $data->file_name);
     }
 
     public function speakerCreate()
@@ -105,6 +143,46 @@ class HomeController extends Controller
             'user_id' => $user
         ];
         Speaker::create($save);
+        return redirect()->back();
+    }
+
+    public function speakerDestroy($id)
+    {
+        $data = Speaker::findOrFail($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
+    public function allyCreate()
+    {
+        $imgAlly = Ally::all();
+        return view('admin.ally', compact(['imgAlly']));
+    }
+
+    public function allyStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:100',
+            'image' => 'required|mimes:jpeg,jpg,png',
+        ]);
+        $user = Auth::id();
+        $file = $request->file('image');
+        $fileName = $file->getClientOriginalName();
+        $path = Storage::disk('public')->put('ally', $file);
+        $save = [
+            'name' => $request->name,
+            'file_name' => $fileName,
+            'url' => $path,
+            'user_id' => $user
+        ];
+        Ally::create($save);
+        return redirect()->back();
+    }
+
+    public function allyDestroy($id)
+    {
+        $data = Ally::findOrFail($id);
+        $data->delete();
         return redirect()->back();
     }
 }
