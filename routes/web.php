@@ -13,8 +13,12 @@
 
 Auth::routes();
 
-// ADMIN
-Route::get('/home', 'HomeController@index')->name('home');
+// CALIFICATION
+Route::resource('/calification', 'CalificationController');
+Route::post('calification/update', 'CalificationController@update')->name('calification.update');
+Route::get('calification/destroy/{id}', 'CalificationController@destroy');
+Route::get('calification/download/{id}', 'CalificationController@download');
+// LOGOUT
 Route::get('/logout', 'HomeController@logout')->name('logout');
 
 //LANDING PAGE
