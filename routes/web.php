@@ -34,6 +34,12 @@ Route::post('/speaker/store', 'HomeController@speakerStore')->name('speaker.stor
 Route::get('speaker/destroy/{id}', 'HomeController@speakerDestroy');
 // ASSISTAN
 Route::get('/assistan', 'HomeController@assistan')->name('assistan');
+// SPEAKER REPORT
+Route::get('/speaker/report', 'HomeController@speakerReport')->name('speaker.report');
+// EVALUATOR
+Route::get('/evaluator', 'HomeController@evaluator')->name('evaluator');
+// EVALUATOR SESSION
+Route::get('/evaluator/session', 'HomeController@evaluatorSession')->name('evaluator.session');
 // ALLY
 Route::get('/ally/create', 'HomeController@allyCreate');
 Route::post('/ally/store', 'HomeController@allyStore')->name('ally.store');

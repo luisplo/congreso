@@ -2,7 +2,7 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Asistentes</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Ponente</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -18,7 +18,7 @@
                             <th class="singleLine">Ciudad</th>
                             <th class="singleLine">Ocupacion</th>
                             <th class="singleLine">Correo</th>
-                            <th class="singleLine">Entidad</th>
+                            <th class="singleLine">Eje Tematico</th>
                         </tr>
                     </thead>
                 </table>
@@ -37,49 +37,39 @@
                 processing: true,
                 serverSide: true,
                 autoWidth: true,
-                scrollX: true,
-                scrollY: true,
+
                 ajax: {
-                    url: "{{ route('assistan') }}",
+                    url: "{{ route('evaluator') }}",
                 },
                 columns: [{
                         data: 'modalityName'
                     },
                     {
                         data: 'type_docu'
-
                     },
                     {
                         data: 'document'
-
                     },
                     {
                         data: 'name'
-
                     },
                     {
                         data: 'last_name'
-
                     },
                     {
                         data: 'departament'
-
                     },
                     {
                         data: 'cityName'
-
                     },
                     {
                         data: 'position'
-
                     },
                     {
                         data: 'email'
-
                     },
                     {
-                        data: 'entity'
-
+                        data: 'main_themeName'
                     },
                 ]
             });

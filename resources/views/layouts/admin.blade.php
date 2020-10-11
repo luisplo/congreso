@@ -27,7 +27,13 @@
         max-width: 100%;
         height: 350px;
     }
-</style>
+     .singleLine {
+            text-wrap: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -46,7 +52,7 @@
             <!-- Nav Item - Dashboard -->
             @if(@Auth::user()->hasRole('evaluator'))
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#"
+                <a class="nav-link collapsed" href="/evaluator/session"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Inicio</span>
@@ -81,10 +87,9 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="assistan">Asistentes</a>
-                        <a class="collapse-item" href="institution">Sede</a>
-                        <a class="collapse-item" href="dependence">Dependencia</a>
-                        <a class="collapse-item" href="provider">Proveedor</a>
+                        <a class="collapse-item" href="/assistan">Asistentes</a>
+                        <a class="collapse-item" href="/speaker/report">Ponentes</a>
+                        <a class="collapse-item" href="/evaluator">Evaluadores</a>
                     </div>
                 </div>
             </li>

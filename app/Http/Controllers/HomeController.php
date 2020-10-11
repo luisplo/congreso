@@ -28,15 +28,56 @@ class HomeController extends Controller
     {
         if ($request->ajax()) {
             $data = DB::table('registers')
+                ->join('modalities', 'registers.modality', '=', 'modalities.id')
                 ->join('type_documents', 'registers.type_document', '=', 'type_documents.id')
                 ->join('cities', 'registers.city', '=', 'cities.id')
                 ->join('departaments', 'cities.departament_id', '=', 'departaments.id')
-                ->select('registers.*', 'type_documents.name as type_docu', 'cities.name as cityName', 'departaments.name as departament')
+                ->select('modalities.name as modalityName','registers.*', 'type_documents.name as type_docu', 'cities.name as cityName', 'departaments.name as departament')
                 ->where('registers.modality','=',2)
                 ->get();
-            return DataTables::of($data)->make(true);
+            return DataTables::of($data)
+                ->make(true);
         }
         return view('admin.assistan');
+    }
+    public function speakerReport(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = DB::table('registers')
+                ->join('modalities', 'registers.modality', '=', 'modalities.id')
+                ->join('type_documents', 'registers.type_document', '=', 'type_documents.id')
+                ->join('cities', 'registers.city', '=', 'cities.id')
+                ->join('departaments', 'cities.departament_id', '=', 'departaments.id')
+                ->join('main_themes', 'main_themes.id', '=', 'registers.main_theme')
+                ->select('modalities.name as modalityName', 'registers.*', 'main_themes.name as main_themeName','type_documents.name as type_docu', 'cities.name as cityName', 'departaments.name as departament')
+                ->where('registers.modality', '=', 1)
+                ->get();
+            return DataTables::of($data)
+                ->make(true);
+        }
+        return view('admin.speakerReport');
+    }
+
+    public function evaluatorSession(Request $request){
+
+    }
+
+    public function evaluator(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = DB::table('registers')
+                ->join('modalities', 'registers.modality', '=', 'modalities.id')
+                ->join('type_documents', 'registers.type_document', '=', 'type_documents.id')
+                ->join('cities', 'registers.city', '=', 'cities.id')
+                ->join('departaments', 'cities.departament_id', '=', 'departaments.id')
+                ->join('main_themes', 'main_themes.id', '=', 'registers.main_theme')
+                ->select('modalities.name as modalityName', 'registers.*', 'main_themes.name as main_themeName', 'type_documents.name as type_docu', 'cities.name as cityName', 'departaments.name as departament')
+                ->where('registers.modality', '=', 4)
+                ->get();
+            return DataTables::of($data)
+                ->make(true);
+        }
+        return view('admin.evaluator');
     }
 
     public function logout()
@@ -45,8 +86,21 @@ class HomeController extends Controller
         return redirect()->route('landing.home');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            $data = DB::table('registers')
+                ->join('modalities', 'registers.modality', '=', 'modalities.id')
+                ->join('type_documents', 'registers.type_document', '=', 'type_documents.id')
+                ->join('cities', 'registers.city', '=', 'cities.id')
+                ->join('departaments', 'cities.departament_id', '=', 'departaments.id')
+                ->join('main_themes', 'main_themes.id', '=', 'registers.main_theme')
+                ->select('modalities.name as modalityName', 'registers.*', 'main_themes.name as main_themeName', 'type_documents.name as type_docu', 'cities.name as cityName', 'departaments.name as departament')
+                ->where('registers.modality', '=', 1)
+                ->get();
+            return DataTables::of($data)
+                ->make(true);
+        }
         return view('admin.home');
     }
 
