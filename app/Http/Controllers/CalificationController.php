@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Exporter;
 use Illuminate\Support\Facades\DB;
+use File;
+use ZipArchive;
 
 class CalificationController extends Controller
 {
@@ -26,7 +28,7 @@ class CalificationController extends Controller
                 ->addColumn('action', function ($data) {
                     $button = '<div class="singleLine"><button type="button" name="edit" id="' . $data->id . '" class="edit d-inline btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>&nbsp;';
                     $button .= '<button type="button" name="edit" id="' . $data->id . '" class="delete d-inline btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>&nbsp;';
-                    $button .= '<a href="calification/download/' . $data->id . '" class="d-inline btn btn-primary btn-sm"><i class="fas fa-download"></i></a></div>';
+                    $button .= '<a href="note/download/' . $data->id . '" class="d-inline btn btn-primary btn-sm"><i class="fas fa-download"></i></a></div>';
                     return $button;
                 })
                 ->rawColumns(['action'])
@@ -59,9 +61,12 @@ class CalificationController extends Controller
             ->get();
         $excel = Exporter::make('Csv');
         $excel->load($data);
+        $urlData = Calification::find($id)->first();
+        $zip = new ZipArchive;
 
+        $excel->stream('data.csv');
+        return Storage::download(storage_path('app/calification/'.$urlData->user_id.'/'.$urlData->url));
 
-        return $excel->stream('data.csv');
     }
 
     /**

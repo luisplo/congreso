@@ -129,7 +129,7 @@
             scrollX: true,
             scrollY: true,
             ajax: {
-                url: "{{ route('calification.index') }}",
+                url: "{{ route('note.index') }}",
             },
             columns: [{
                     data: 'name_project'
@@ -166,11 +166,11 @@
                 var action_url = '';
 
                 if ($('#action').val() == 'Add') {
-                    action_url = "{{ route('calification.store') }}";
+                    action_url = "{{ route('note.store') }}";
                 }
 
                 if ($('#action').val() == 'Edit') {
-                    action_url = "{{ route('calification.update') }}";
+                    action_url = "{{ route('note.update') }}";
                 }
 
                 $.ajax({
@@ -202,7 +202,7 @@
                 var id = $(this).attr('id');
                 $('#form_result').html('');
                 $.ajax({
-                    url: "/calification/" + id + "/edit",
+                    url: "/note/" + id + "/edit",
                     dataType: "json",
                     success: function(data) {
                         var data = data.result;
@@ -231,7 +231,7 @@
 
             $('#ok_button').click(function() {
                 $.ajax({
-                    url: "calification/destroy/" + user_id,
+                    url: "note/destroy/" + user_id,
                     beforeSend: function() {
                         $('#ok_button').text('Eliminando...');
                     },

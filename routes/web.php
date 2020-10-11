@@ -14,10 +14,10 @@
 Auth::routes();
 
 // CALIFICATION
-Route::resource('/calification', 'CalificationController');
-Route::post('calification/update', 'CalificationController@update')->name('calification.update');
-Route::get('calification/destroy/{id}', 'CalificationController@destroy');
-Route::get('calification/download/{id}', 'CalificationController@download');
+Route::resource('/note', 'CalificationController');
+Route::post('note/update', 'CalificationController@update')->name('note.update');
+Route::get('note/destroy/{id}', 'CalificationController@destroy');
+Route::get('note/download/{id}', 'CalificationController@download');
 // LOGOUT
 Route::get('/logout', 'HomeController@logout')->name('logout');
 
