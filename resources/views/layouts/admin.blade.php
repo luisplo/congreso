@@ -44,7 +44,12 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
+            @if (@Auth::user()->hasRole('evaluator'))
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/note">
+            @endif
+            @if (@Auth::user()->hasRole('admin'))
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/carousel/create">
+            @endif
                 <div class="sidebar-brand-icon">
                     <img src="{{ url('storage/logo/sena.svg') }}" width="40px" height="40px">
                 </div>
@@ -57,7 +62,7 @@
             <!-- Nav Item - Dashboard -->
             @if (@Auth::user()->hasRole('evaluator'))
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="/calification" aria-expanded="true"
+                    <a class="nav-link collapsed" href="/note" aria-expanded="true"
                         aria-controls="collapseTwo">
                         <i class="fas fa-fw fa-cog"></i>
                         <span>Inicio</span>
