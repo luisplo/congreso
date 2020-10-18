@@ -36,8 +36,8 @@
                 },
                 processing: true,
                 serverSide: true,
-                autoWidth: true,
-                scrollX: true,
+                autoWidth: false,
+                scrollX: false,
                 scrollY: true,
                 ajax: {
                     url: "{{ route('assistan') }}",

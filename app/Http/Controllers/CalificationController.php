@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Exporter;
 use Illuminate\Support\Facades\DB;
-use File;
-use ZipArchive;
+
 
 class CalificationController extends Controller
 {
@@ -59,14 +58,10 @@ class CalificationController extends Controller
             ->select('modalities.name as modalityName', 'main_themes.name as main_themeName', 'type_documents.name as type_docu', 'registers.document as documentEvaluator', 'registers.name as nameEvaluator', 'registers.last_name as lastNameEvaluator',  'departaments.name as departament', 'cities.name as cityName', 'califications.name_project', 'califications.name_owner', 'califications.entity', 'califications.speaker_cal')
             ->where('califications.id', '=', $id)
             ->get();
+        $val = Calification::find($id)->first();
         $excel = Exporter::make('Csv');
         $excel->load($data);
-        $urlData = Calification::find($id)->first();
-        $zip = new ZipArchive;
-
-        $excel->stream('data.csv');
-        return Storage::download(storage_path('app/calification/'.$urlData->user_id.'/'.$urlData->url));
-
+        return $excel->stream($val->url);
     }
 
     /**

@@ -9,15 +9,15 @@
     }
 </style>
 <!-- ======= Team Section ======= -->
-<section id="team">
+<section id="team" class="section-bg">
     <div class="container " data-aos="fade-up">
         <header class="section-header">
             <h3 class="section-title">Conferencistas</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam gravida nibh et rutrum fringilla. Donec vitae efficitur urna. Cras risus metus, interdum quis pharetra eu, gravida ac dui.</p>
         </header>
-        <div class="row  d-flex justify-content-center">
+        <div class="row portfolio-container  d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
             @foreach($speakerImg as $key => $value)
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                 <div class="member" data-aos="fade-up" >
                     <img src="{{ url('storage/'.$value->url) }}" alt="">
                     <div class="member-info">
@@ -63,9 +63,9 @@
             <h3 class="section-title">Aliados</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam gravida nibh et rutrum fringilla. Donec vitae efficitur urna. Cras risus metus, interdum quis pharetra eu, gravida ac dui.</p>
         </header>
-        <div class="row  d-flex justify-content-center">
+        <div class="row portfolio-container  d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
             @foreach($allyImg as $key => $value)
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                 <div class="member" data-aos="fade-up">
                     <img src="{{ url('storage/'.$value->url) }}" alt="">
                     <div class="member-info">
