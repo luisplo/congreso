@@ -13,7 +13,6 @@
     <div class="container " data-aos="fade-up">
         <header class="section-header">
             <h3 class="section-title">Conferencistas</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam gravida nibh et rutrum fringilla. Donec vitae efficitur urna. Cras risus metus, interdum quis pharetra eu, gravida ac dui.</p>
         </header>
         <div class="row portfolio-container  d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
             @foreach($speakerImg as $key => $value)
@@ -38,7 +37,6 @@
     <div class="container" data-aos="fade-up">
         <header class="section-header">
             <h3 class="section-title">Cronograma</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam gravida nibh et rutrum fringilla. Donec vitae efficitur urna. Cras risus metus, interdum quis pharetra eu, gravida ac dui.</p>
         </header>
         <div class="row portfolio-container  d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
             @foreach ($calendarImg as $key => $value)
@@ -61,7 +59,6 @@
     <div class="container " data-aos="fade-up">
         <header class="section-header">
             <h3 class="section-title">Aliados</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam gravida nibh et rutrum fringilla. Donec vitae efficitur urna. Cras risus metus, interdum quis pharetra eu, gravida ac dui.</p>
         </header>
         <div class="row portfolio-container  d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
             @foreach($allyImg as $key => $value)
